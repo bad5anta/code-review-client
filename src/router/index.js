@@ -46,8 +46,9 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const user = localStorage.getItem('user');
-  if (!user && to.path !== '/login') {
+  const token = localStorage.getItem('token');
+  if (!token && to.path !== '/login') {
+    localStorage.removeItem('token');
     localStorage.setItem('redirect', to.path);
     next('/login');
   }

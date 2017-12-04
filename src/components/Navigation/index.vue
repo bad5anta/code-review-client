@@ -14,6 +14,18 @@
           <b-nav-text @click="eventBusEmit('upload-modal-on')">Upload diff</b-nav-text>
         </b-navbar-nav>
 
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+
+          <b-nav-item-dropdown right>
+            <!-- Using button-content slot -->
+            <template slot="button-content">
+              <em>{{email}}</em>
+            </template>
+            <b-dropdown-item to="/login" @click="clearUser">Signout</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+
       </b-collapse>
     </b-navbar>
     <b-container>
@@ -33,11 +45,15 @@ export default {
   },
   data() {
     return {
+      email: localStorage.getItem('email') || 'User',
     };
   },
   methods: {
     eventBusEmit(eventName) {
       EventBus.$emit(eventName);
+    },
+    clearUser() {
+      localStorage.removeItem('token');
     },
   },
 };

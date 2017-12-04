@@ -41,7 +41,8 @@ export default {
       const { error, data: user } = await users.login(this.email, this.password);
       if (!error && user.token) {
         base.defaults.headers.common.Authorization = user.token;
-        localStorage.setItem('user', user);
+        localStorage.setItem('token', user.token);
+        localStorage.setItem('email', user.email);
         const redirect = localStorage.getItem('redirect') || '/';
         this.$router.push(redirect);
       } else {

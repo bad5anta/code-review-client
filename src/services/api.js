@@ -5,6 +5,9 @@ const API_HOST = 'https://code-review.herokuapp.com/';
 
 export const base = axios.create({
   baseURL: API_HOST,
+  headers: {
+    Authorization: localStorage.getItem('token') || '',
+  },
 });
 
 export const diffs = {

@@ -1,13 +1,20 @@
-import Vue from 'vue';
+import axios from 'axios';
 import demo from '../demo';
 
+const API_HOST = 'https://code-review.herokuapp.com/';
+
+export const base = axios.create({
+  baseURL: API_HOST,
+});
+
 export const diffs = {
-  // Vue.axios.get('/api/diff').then(({ data }) => data);
+  // base.get('/api/diff').then(({ data }) => data);
   index: () => demo,
-  get: id => Vue.axios.get(`/api/diff/${id}`).then(({ data }) => data),
+  get: id => base.get(`api/diff/${id}`).then(({ data }) => data),
 };
 
-// Linter pls
-export const something = {
-
+export const users = {
+  login: (email, password) => base.post('api/v1/sessions', {
+    user: { email, password },
+  }),
 };

@@ -2,7 +2,7 @@
   <b-col cols="12" class="card-block">
     <b-card>
       <h4 class="card-title">Created by {{item.author}}
-        <span v-if="item.status === 'done'"> reviewed by <b>{{item.reviewer}}</b>
+        <span v-if="item.status === 'done'" reviewed by <b>{{item.reviewer}}</b>
         </span>
       </h4>
       <h6 class="card-subtitle mb-2 text-muted">Created {{date}}</h6>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['item'],
+  props: ['diff'],
   data() {
     return {
       date: new Date(this.item.createdAt).toLocaleString(),

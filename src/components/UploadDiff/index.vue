@@ -69,6 +69,7 @@
             technology: this.technology,
           };
 
+          console.log(diff);
           // TODO upload this diff
         };
 

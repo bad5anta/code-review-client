@@ -2,9 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import BootstrapVue from 'bootstrap-vue';
 
-import DiffPage from '@/components/DiffPage';
+import Login from '@/components/Login';
 import Pending from '@/components/Pending';
 import Current from '@/components/Current';
+import DiffPage from '@/components/DiffPage';
 import Navigation from '@/components/Navigation';
 
 // Styles
@@ -14,9 +15,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 Vue.use(Router);
 Vue.use(BootstrapVue);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/login',
+      component: Login,
+    },
     {
       path: '/',
       name: 'dashboard',
@@ -39,3 +44,14 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  const user = localStorage.getItem('user');
+  if (!user && to.path !== '/login') {
+    localStorage.setItem('redirect', to.path);
+    next('/login');
+  }
+  next();
+});
+
+export default router;

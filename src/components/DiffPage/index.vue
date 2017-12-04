@@ -1,6 +1,11 @@
 <template>
   <div class="dashboard">
-    <div v-for="jsonDiffElement in jsonDiff">
+    <p><b>Author:</b> Pupkin</p>
+    <p><b>Date:</b> date</p>
+    <p><b>Status:</b> new</p>
+    <p><b>Technology:</b> ReactJS</p>
+
+    <div id="diff-holder" v-for="jsonDiffElement in jsonDiff">
       <diff-file :fileElement="jsonDiffElement" />
     </div>
   </div>
@@ -39,4 +44,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   @import '../../../node_modules/diff2html/dist/diff2html.css';
+
+  #diff-holder {
+    margin-top: 2rem;
+  }
+
+  .dashboard {
+    padding-top: 2rem;
+  }
 </style>

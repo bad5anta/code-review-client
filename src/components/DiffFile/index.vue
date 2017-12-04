@@ -8,7 +8,10 @@
       </svg>
     </span>
     <span class="d2h-file-name">{{fileElement.oldName}}</span>
-    <span class="d2h-tag d2h-changed d2h-changed-tag">CHANGED</span></span>
+    <span v-if="fileElement.isDeleted" class="d2h-tag d2h-deleted d2h-deleted-tag">DELETED</span>
+    <span v-else-if="fileElement.isNew" class="d2h-tag d2h-added d2h-added-tag">ADDED</span>
+    <span v-else class="d2h-tag d2h-changed d2h-changed-tag">CHANGED</span>
+      </span>
     </div>
     <div class="d2h-file-diff">
       <div class="d2h-code-wrapper">

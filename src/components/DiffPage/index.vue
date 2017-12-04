@@ -16,9 +16,8 @@
 import DiffFile from '@/components/DiffFile';
 
 export default {
-  name: 'HelloWorld',
   components: {
-    DiffFile
+    DiffFile,
   },
   data() {
     return {
@@ -44,8 +43,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import '../../../node_modules/diff2html/dist/diff2html.css';
-
   #diff-holder {
     margin-top: 2rem;
   }

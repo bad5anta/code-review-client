@@ -43,7 +43,7 @@ const store = new Vuex.Store({
       ]).then(() => commit('setReady', true));
     },
     uploadDiff({}, data) {
-      base.put('api/v1/diffs', data);
+      base.post('api/v1/diffs', data);
     },
   },
   getters: {

@@ -72,7 +72,7 @@
           const outputJSON = Diff2Html.getJsonFromDiff(result);
 
           const diff = {
-            code_changes: outputJSON,
+            code_changes: JSON.stringify(outputJSON),
             technology: this.technology,
           };
 

@@ -26,7 +26,7 @@ export default {
       this.loading = true;
       const data = await diffs.index();
       this.loading = false;
-      this.diffs = data;
+      this.diffs = data.filter(({ status }) => status === 'new');
     },
   },
 };

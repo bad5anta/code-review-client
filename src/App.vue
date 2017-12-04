@@ -8,6 +8,16 @@
 
 export default {
   name: 'app',
+  data() {
+    return {
+      users: [],
+      diffs: [],
+      stacks: [],
+    };
+  },
+  mounted() {
+
+  },
 };
 </script>
 

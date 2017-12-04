@@ -17,14 +17,14 @@
       <div class="d2h-code-wrapper">
         <table class="d2h-diff-table">
           <tbody class="d2h-diff-tbody">
-          <template v-for="block in fileElement.blocks">
+          <template v-for="(block, blockIndex) in fileElement.blocks">
             <tr>
               <td class="d2h-code-linenumber d2h-info"></td>
               <td class="d2h-info">
                 <div class="d2h-code-line d2h-info">{{block.header}}</div>
               </td>
             </tr>
-            <template v-for="line in block.lines">
+            <template v-for="(line, lineIndex) in block.lines">
               <tr>
                 <td :class="['d2h-code-linenumber', line.type]">
                   <div class="line-num1">{{line.oldNumber}}</div>
@@ -34,6 +34,13 @@
                   <div :class="['d2h-code-line', line.type]">
                     <span class="d2h-code-line-prefix">{{line.content[0]}}</span>
                     <span class="d2h-code-line-ctn">{{line.content.slice(1)}}</span>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="lineIndex === 4 && comments && comments.length">
+                <td colspan="2">
+                  <div v-for="comment in comments">
+                    <comment-item :data="comment"></comment-item>
                   </div>
                 </td>
               </tr>
@@ -47,7 +54,24 @@
 </template>
 
 <script>
+  import _ from 'lodash';
+  import CommentItem from '@/components/CommentItem';
+
   export default {
-    props: ['fileElement'],
+    props: ['fileElement', 'fileIndex'],
+    components: {
+      CommentItem,
+    },
+    data() {
+      return {
+        comments: [
+          {
+            text: 'Lorem ipsum',
+            author: 'Pupkin',
+            createdAt: (new Date()).getTime()
+          },
+        ]
+      }
+    },
   }
 </script>

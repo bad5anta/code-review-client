@@ -1,12 +1,13 @@
 <template>
   <div class="dashboard">
     <p><b>Author:</b> Pupkin</p>
+    <p><b>Reviewer:</b> Pupkin</p>
     <p><b>Date:</b> date</p>
     <p><b>Status:</b> new</p>
     <p><b>Technology:</b> ReactJS</p>
 
-    <div id="diff-holder" v-for="jsonDiffElement in jsonDiff">
-      <diff-file :fileElement="jsonDiffElement" />
+    <div id="diff-holder" v-for="(jsonDiffElement, fileIndex) in jsonDiff">
+      <diff-file :fileElement="jsonDiffElement" :fileIndex="fileIndex" />
     </div>
   </div>
 </template>

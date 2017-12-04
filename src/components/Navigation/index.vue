@@ -1,16 +1,16 @@
 <template>
   <div>
-    <b-navbar toggleable="md" type="dark" variant="info">
+    <b-navbar toggleable="md" type="dark" variant="info" sticky>
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-      <b-navbar-brand to="/pending">Such CodeReview</b-navbar-brand>
+      <b-navbar-brand to="/dashboard">Such CodeReview</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
 
         <b-navbar-nav>
           <b-nav-item to="/pending">Pending reviews</b-nav-item>
-          <b-nav-item to="/my">My reviews</b-nav-item>
+          <b-nav-item to="/finished">Finished reviews</b-nav-item>
           <b-nav-text @click="eventBusEmit('upload-modal-on')">Upload diff</b-nav-text>
         </b-navbar-nav>
 

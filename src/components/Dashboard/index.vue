@@ -1,25 +1,75 @@
 <template>
-  <div class="dashboard">
-    <upload-diff></upload-diff>
-  </div>
+  <b-row >
+    <b-col cols="12" v-if="pending.length > 0" class="card-block">
+      <b-card title="Pending Reviews" sub-title="Last 20 entries">
+        <b-table stacked="md" :items="pending" :fields="fields">
+          <template slot="createdAt" scope="row">
+            {{ new Date(row.item.createdAt).toLocaleString() }}
+          </template>
+          <template slot="actions" scope="row">
+            <b-button variant="success" size="sm" :to="{ name: 'viewDiff', params: { diffId: row.item.id } }">
+              Review
+            </b-button>
+          </template>
+        </b-table>
+        <div slot="footer">
+          <b-button to="/pending" variant="primary" >View all</b-button>
+        </div>
+      </b-card>
+    </b-col>
+    <b-col cols="12" v-if="finished.length > 0" class="card-block">
+      <b-card title="Finished Reviews" sub-title="Last 20 entries">
+        <b-table stacked="md" :items="finished" :fields="fields">
+          <template slot="createdAt" scope="row">
+            {{ new Date(row.item.createdAt).toLocaleString() }}
+          </template>
+          <template slot="actions" scope="row">
+            <b-button variant="primary" size="sm" :to="{ name: 'viewDiff', params: { diffId: row.item.id } }">
+              View {{row.item.comments.length === 1 ? 'comment' : 'comments' }} <b-badge variant="light">{{ row.item.comments.length }}</b-badge>
+            </b-button>
+          </template>
+        </b-table>
+        <div slot="footer">
+          <b-button to="/finished" variant="primary" >View all</b-button>
+        </div>
+      </b-card>
+    </b-col>
+  </b-row >
 </template>
 
 <script>
-  import UploadDiff from '@/components/UploadDiff';
+import { diffs } from '@/services/api';
 
 export default {
-  name: 'HelloWorld',
-  components: {
-    UploadDiff,
-  },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      fields: [
+        { key: 'author', label: 'Author' },
+        { key: 'reviewer', label: 'Reviewer' },
+        { key: 'createdAt', label: 'Created' },
+        { key: 'technology', label: 'Technology' },
+        { key: 'actions', label: 'Actions' },
+      ],
+      finished: [],
+      pending: [],
     };
   },
+  created() {
+    this.loadData()
+  },
+  methods: {
+    async loadData() {
+      const data = await diffs.index();
+      this.finished = data.slice(0, 19);
+      this.pending = data.slice(0, 19);
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.card-block {
+  margin: 24px 0;
+}
 </style>

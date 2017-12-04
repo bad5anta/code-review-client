@@ -6,6 +6,7 @@ import Login from '@/components/Login';
 import Pending from '@/components/Pending';
 import Current from '@/components/Current';
 import DiffPage from '@/components/DiffPage';
+import Dashboard from '@/components/Dashboard';
 import Navigation from '@/components/Navigation';
 
 // Styles
@@ -26,18 +27,23 @@ const router = new Router({
       path: '/',
       name: 'dashboard',
       component: Navigation,
-      redirect: '/pending',
+      redirect: '/dashboard',
       children: [
+        {
+          path: 'dashboard',
+          component: Dashboard,
+        },
         {
           path: 'pending',
           component: Pending,
         },
         {
-          path: 'my',
+          path: 'finished',
           component: Current,
         },
         {
           path: 'diff/:diffId',
+          name: 'viewDiff',
           component: DiffPage,
         },
       ],

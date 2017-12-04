@@ -1,29 +1,17 @@
-
 <template>
-  <div class="dashboard">
-    <li v-for="(item, index) in diffs">
-      <b-card title="Card Title"
-        :key="item.id"
-        img-src="https://lorempixel.com/600/300/food/5/"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2">
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </p>
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-      </b-card>
-    </li>
-  </div>
+  <b-row >
+    <diff-card :key="index" :item="item" v-for="(item, index) in diffs"/>
+  </b-row>
 </template>
 
 <script>
 import { diffs } from '@/services/api';
+import DiffCard from '@/components/DiffCard';
 
 export default {
-  name: 'HelloWorld',
+  components: {
+    DiffCard,
+  },
   data() {
     return {
       loading: false,

@@ -21,7 +21,7 @@ export default new Router({
       path: '/',
       name: 'dashboard',
       component: Navigation,
-      alias: 'pending',
+      redirect: '/pending',
       children: [
         {
           path: 'pending',
@@ -32,7 +32,7 @@ export default new Router({
           component: Current,
         },
         {
-          path: 'diff/diffId',
+          path: 'diff/:diffId',
           component: DiffPage,
         },
       ],

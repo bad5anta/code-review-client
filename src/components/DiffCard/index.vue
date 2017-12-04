@@ -7,7 +7,7 @@
       </h4>
       <h6 class="card-subtitle mb-2 text-muted">Created {{date}}</h6>
       <p class="card-badge"><b-badge>{{item.technology}}</b-badge></p>
-      <div>
+      <div v-if="item.changes.length < 20">
         <p>File list:</p>
         <b-list-group>
           <b-list-group-item :key="index" v-for="(item, index) in item.changes" class="file-line">
@@ -19,6 +19,9 @@
             <span v-else class="tag changed-tag">CHANGED</span>
           </b-list-group-item>
         </b-list-group>
+      </div>
+      <div v-else>
+        <p>Modified more than 20 files</p>
       </div>
       <div slot="footer">
         <b-button :to="cardLink" variant="primary" v-if="item.status === 'done'">View full</b-button>

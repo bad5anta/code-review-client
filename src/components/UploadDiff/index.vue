@@ -73,7 +73,7 @@
 
           const diff = {
             code_changes: JSON.stringify(outputJSON),
-            technology: this.technology,
+            stack_id: this.technology,
           };
 
           this.$store.dispatch('uploadDiff', diff);

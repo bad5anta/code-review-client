@@ -9,7 +9,19 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      diff: {
+        json: {},
+        comments: [
+          {
+            position: null, // will define format later
+            text: '', // comment text
+          },
+        ],
+        createdAt: (new Date()).getTime(),
+        reviewer: null, // USER included or id
+        status: 'new', // Also can be 'done'
+        technology: 'ReactJS', // Any
+      },
     };
   },
 };

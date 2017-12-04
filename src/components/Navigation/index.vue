@@ -11,6 +11,7 @@
         <b-navbar-nav>
           <b-nav-item to="/pending">Pending reviews</b-nav-item>
           <b-nav-item to="/my">My reviews</b-nav-item>
+          <b-nav-text @click="eventBusEmit('upload-modal-on')">Upload diff</b-nav-text>
         </b-navbar-nav>
 
       </b-collapse>
@@ -18,15 +19,26 @@
     <b-container>
       <router-view/>
     </b-container>
+    <upload-diff></upload-diff>
   </div>
 </template>
 
 <script>
+import UploadDiff from '@/components/UploadDiff';
+import EventBus from '@/event-bus';
 
 export default {
+  components: {
+    UploadDiff,
+  },
   data() {
     return {
     };
+  },
+  methods: {
+    eventBusEmit(eventName) {
+      EventBus.$emit(eventName);
+    },
   },
 };
 </script>

@@ -19,6 +19,7 @@ export default {
         ],
         createdAt: (new Date()).getTime(),
         reviewer: null, // USER included or id
+        author: null, // USER included or id
         status: 'new', // Also can be 'done'
         technology: 'ReactJS', // Any
       },

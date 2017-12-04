@@ -7,7 +7,7 @@
         :use-custom-dropzone-options="true"
         :options="uploadDropzoneOptions"
       ></dropzone>
-      <b-form-select v-model="technology" :options="technologiesList"></b-form-select>
+      <b-form-select v-model="technology" :options="getStacks"></b-form-select>
     </div>
   </b-modal>
 </template>
@@ -27,7 +27,6 @@
         showUploadModal: false,
         diffJSON: null,
         technology: null,
-        technologiesList: ['React', 'Rails', 'Vue'],
         uploadDropzoneOptions: {
           url: 'https://httpbin.org/post',
           autoProcessQueue: false,
@@ -35,6 +34,15 @@
           maxFiles: 1,
         },
       };
+    },
+    computed: {
+      getStacks() {
+        const stacks = this.$store.state.stacks;
+        return Object.keys(stacks).map(stack_id => {
+          const stack = stacks[stack_id];
+          return { value: stack.id, text: stack.attributes.name };
+        });
+      },
     },
     mounted() {
       EventBus.$on(`${this.modalEvent}-on`, this.onModalShow);
@@ -64,13 +72,11 @@
           const outputJSON = Diff2Html.getJsonFromDiff(result);
 
           const diff = {
-            json: outputJSON,
-            status: 'new', // Also can be 'done'
+            code_changes: outputJSON,
             technology: this.technology,
           };
 
-          console.log('diff', diff);
-          // TODO upload this diff
+          this.$store.dispatch('uploadDiff', diff);
         };
 
         reader.readAsText(files[0]);
